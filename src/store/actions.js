@@ -51,27 +51,33 @@ const fetchSchools = () => {
 
 const createStudent = (student) => {
     return( async (dispatch) => {
-            const created = (await axios.post('/api/students', student)).data
-            return dispatch(create_student(created));
+        await axios.post('/api/students', student);
+        const students = (await axios.get('/api/students')).data;
+        return dispatch(create_student(students));
     })
 }
 
 const deleteStudent = (student) => {
-    return( async (dispatch) => {
-             (await axios.delete(`/api/students/${student.id}`)).data
-            return dispatch(delete_student(student));
+    return( async dispatch =>{
+        await axios.delete(`/api/students/${student.id}`)
+        return dispatch(delete_student(student))
     })
 }
 
 const updateStudent = (student, newSchoolId) => {
-    console.log(newSchoolId)
+    // console.log(newSchoolId)
     student.schoolId = newSchoolId
-    console.log(student)
+    // console.log(student)
 
-    return( dispatch => {
-        axios.put(`/api/students/${student.id}`, student)
-        .then(response => response.data)
-        .then( _student => dispatch(update_student(_student)))
+    // return( dispatch => {
+    //     axios.put(`/api/students/${student.id}`, student)
+    //     .then(response => response.data)
+    //     .then( _student => dispatch(update_student(_student)))
+    // })
+    return (async dispatch => {
+        await axios.put(`/api/students/${student.id}, student`)
+        const students = await axios.get('/api/students').data;
+        return dispatch(update_student(students))
     })
 }
 

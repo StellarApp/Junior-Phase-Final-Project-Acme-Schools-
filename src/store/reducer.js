@@ -1,5 +1,11 @@
 import { combineReducers } from "redux";
-import { SET_SCHOOLS, SET_STUDENTS } from "./constants";
+import {
+  SET_STUDENTS,
+  DELETE_STUDENT,
+  UPDATE_STUDENT,
+  CREATE_STUDENT,
+  SET_SCHOOLS
+} from "./constants";
 
 const schoolReducer = (state = [], action) => {
   switch (action.type) {
@@ -9,12 +15,17 @@ const schoolReducer = (state = [], action) => {
   }
   return state;
 };
+
 const studentReducer = (state = [], action) => {
   switch (action.type) {
     case SET_STUDENTS:
       return action.students;
-    // default:
-    //   return state;
+    case DELETE_STUDENT:
+      return state.filter(_student => _student.id !== action.student.id);
+    case UPDATE_STUDENT:
+      return action.students;
+    case CREATE_STUDENT:
+      return action.students;
   }
   return state;
 };

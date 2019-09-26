@@ -9,8 +9,14 @@ import { actions } from "./store";
 import { connect } from "react-redux";
 
 class App extends Component {
+  constructor(){
+    super(),
+    this.state = {}
+  }
+  
   componentDidMount() {
-    this.props.fetchSchools(), this.props.fetchStudents();
+    this.props.fetchSchools(), 
+    this.props.fetchStudents();
   }
 
   render() {
