@@ -5,6 +5,7 @@ const { School, Student } = require("./db").models;
 
 app.use(express.json());
 app.use("/build", express.static(path.join(__dirname, "dist")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 app.get("/", (req, res, next) =>
   res.sendFile(path.join(__dirname, "index.html"))
@@ -35,25 +36,19 @@ app.post("/api/students", (req, res, next) => {
 });
 
 app.delete("/api/students/:id", (req, res, next) => {
-  console.log("at delete route");
   Student.findByPk(req.params.id)
     .then(
       student => student.destroy()
-      // Student.destroy({
-      //   where: {
-      //     id: student.id
-      //   }
-      // })
-      // student.destroy()
     )
+    .then(response => res.send(response.dataValues))
     .then(() => res.status(200))
     .catch(next);
 });
 
 app.put("/api/students/:id", (req, res, next) => {
   Student.findByPk(req.params.id)
-    .then(student => 
-      student.update(req.body))
+    .then(student => student.update({ schoolId: req.body.schoolId }))
+    .then(response => res.send(response.dataValues))
     .then(() => res.status(200))
     .catch(next);
 });

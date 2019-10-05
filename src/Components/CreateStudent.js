@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import { actions } from "../store";
+import { stringify } from "querystring";
 
 class CreateStudent extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ class CreateStudent extends React.Component {
       GPA: "",
       enrolledAt: "",
       schoolId: "",
-      error: false
+      error: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -34,8 +35,12 @@ class CreateStudent extends React.Component {
     this.props
       .create({ firstName, lastName, email, GPA, schoolId })
       .then(() => this.props.history.push("/"))
-      .catch(ex => 
-        this.setState({error: ex})
+      .catch(ex => {
+        let error = [];
+        error = ex.response.data.error.errors.map( _error => _error.message)
+        this.setState({ error});
+      }
+        
         );
   }
 
@@ -110,9 +115,11 @@ class CreateStudent extends React.Component {
             ))}
           </select>
         </div>
+        <div>
         <button onClick={Submit}>Save</button>
-        {error && <div className="error-box"> {error} </div>}
-      </div>
+        {error && <div className="error-box"> {error.map(_error => <p>{_error}</p>
+        )} </div>}
+      </div></div>
     );
   }
 }

@@ -11,8 +11,8 @@ const schoolReducer = (state = [], action) => {
   switch (action.type) {
     case SET_SCHOOLS:
       return action.schools;
-      break;
-  }
+    
+  } 
   return state;
 };
 
@@ -23,9 +23,9 @@ const studentReducer = (state = [], action) => {
     case DELETE_STUDENT:
       return state.filter(_student => _student.id !== action.student.id);
     case UPDATE_STUDENT:
-      return action.students;
+      return state.map(_student => (_student.id === action.student.id)? action.student : _student)
     case CREATE_STUDENT:
-      return action.students;
+      return [...state, action.student];
   }
   return state;
 };

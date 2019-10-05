@@ -7,11 +7,14 @@ const Nav = ({count_schools, count_students, maxStudents, popularSchool, maxGPA,
   return (
     <div>
       <h2>ACME Schools</h2>
+      <div className="nav">
         <NavLink to="/" exact >Acme Schools</NavLink>
         <NavLink exact to="/schools">Schools({count_schools})</NavLink>
         <NavLink exact to="/students">Students({count_students})</NavLink>
         <NavLink to={`/schools/${popularSchool.id}`}>Most Popular [{popularSchool.name}] ({maxStudents})</NavLink>
         <NavLink to={`/schools/${topSchool.id}`}>Top School [{topSchool.name}] ({maxGPA})</NavLink>
+      </div>
+        
     </div>
   );
 };

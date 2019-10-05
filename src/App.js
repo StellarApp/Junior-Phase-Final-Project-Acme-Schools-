@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Redirect } from "react-router-dom";
 import Students from "./Components/Students";
 import Schools from "./Components/Schools";
 import CreateStudent from "./Components/CreateStudent.js";
@@ -18,6 +18,10 @@ class App extends Component {
     this.props.fetchSchools(), 
     this.props.fetchStudents();
   }
+  
+  // async componentDidMount(){
+
+  // }
 
   render() {
     return (
@@ -28,6 +32,7 @@ class App extends Component {
         <Route exact path="/students" component={Students} />
         <Route exact path="/schools" component={Schools} />
         <Route path="/schools/:id" component={Students} />
+        <Redirect to="/" />
       </HashRouter>
     );
   }

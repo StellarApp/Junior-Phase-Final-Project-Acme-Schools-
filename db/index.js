@@ -7,7 +7,7 @@ Student.belongsTo(School);
 School.hasMany(Student);
 
 const syncAndSeed = async () => {
-  await conn.sync({ force: true });
+  await conn.sync({ force: false});
   //https://www.spellbrand.com/top-10-american-university-college-logos
   const schools = [{name:"Not Enrolled"},
   {name: "Yale", imgURL: "img url" },

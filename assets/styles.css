@@ -1,0 +1,51 @@
+.nav {
+    display: flex;
+    justify-content: space-around;
+    background: maroon;
+}
+.nav a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 0.8;
+}
+.active{
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+h2 {
+    color:maroon;
+}
+
+#newStudentForm{
+    background: salmon;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 7%;
+}
+
+#newStudentForm > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+button {
+    width: 20%;
+    padding: 10px;
+    background: maroon;
+    color: white;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+* {
+    margin: 5px;
+}
