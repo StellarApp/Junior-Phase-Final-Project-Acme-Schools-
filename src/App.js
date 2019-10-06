@@ -32,7 +32,7 @@ class App extends Component {
         <Route exact path="/students" component={Students} />
         <Route exact path="/schools" component={Schools} />
         <Route path="/schools/:id" component={Students} />
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
       </HashRouter>
     );
   }

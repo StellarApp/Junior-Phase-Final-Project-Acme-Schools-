@@ -1,9 +1,9 @@
 const { NavLink } = require("react-router-dom");
 const React = require("react");
 const { connect } = require("react-redux");
-// import mapStateToProps from ('../store/mapper') ;
+// import mapStateToProps from ('../store/mapper');
 
-const Nav = ({count_schools, count_students, maxStudents, popularSchool, maxGPA, topSchool}) => {
+const Nav = ({count_schools, count_students, maxStudents, popularSchool, maxGPA, topSchool, schools, students}) => {
   return (
     <div>
       <h2>ACME Schools</h2>
@@ -20,6 +20,8 @@ const Nav = ({count_schools, count_students, maxStudents, popularSchool, maxGPA,
 };
 
 const mapStateToProps = ({ schools, students }) => {
+  // Remove Not Enrolled
+  schools = schools.filter(school => school.name !== "Not Enrolled")
   const maxStudents = Math.max(
     ...schools.map(school => school.students.length)
   );
@@ -39,7 +41,7 @@ const mapStateToProps = ({ schools, students }) => {
   schools.forEach(school => {
     const noOfStudents = school.students.length;
     const sumOfGPA = school.students.reduce(
-      (accum, ele) => (accum += ele.GPA * 1),
+      (accum, ele) => accum += ele.GPA *1,
       0
     );
     school.avgGPA = noOfStudents
@@ -60,7 +62,7 @@ const mapStateToProps = ({ schools, students }) => {
   return {
     schools,
     students,
-    count_schools: schools.length,
+    count_schools: schools.length, 
     count_students: students.length,
     popularSchool,
     maxStudents,

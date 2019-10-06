@@ -3,25 +3,25 @@ import React from "react";
 import { actions } from "../store";
 
 const Students = ({ students, schools, deleteStudent, updateStudent }) => {
+
   return (
-    <div>
+    <div className="body-content">
       {students.map(student => {
         const _schoolId = student.schoolId;
         const _schoolName = schools.find(s => s.id === _schoolId).name;
+        const _schoolImg = schools.find(s => s.id === _schoolId).imgURL;
         return (
           <div key={student.id} className="box-student">
             <h4>
               {student.firstName} {student.lastName}
             </h4>
+              {(_schoolImg)? <img src={`${_schoolImg}`} alt={`${_schoolName}`} /> : ''}
             <div> GPA: {student.GPA}</div>
-            <select
+            <div><select
               onChange={({ target }) => updateStudent(student.id, target.value)}
             >
               <option key={student.id} value={_schoolId} defaultValue>
                 {_schoolName}
-              </option>
-              <option key="notEnrolled" value="Not Enrolled">
-                Not Enrolled
               </option>
               {schools
                 .filter(x => x.id !== _schoolId)
@@ -30,8 +30,9 @@ const Students = ({ students, schools, deleteStudent, updateStudent }) => {
                     {school.name}
                   </option>
                 ))}
-            </select>
-            <button onClick={() => deleteStudent(student)}>Delete</button>
+            </select></div>
+            <div><button onClick={() => deleteStudent(student)}>Delete</button></div>
+            
           </div>
         );
       })}

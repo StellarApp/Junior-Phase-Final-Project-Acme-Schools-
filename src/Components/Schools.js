@@ -6,12 +6,13 @@ import { expression } from "@babel/template";
 const Schools = ({ schools, students , updateStudent, location}) => {
  
   return (
-    <div>
-      {schools.map(school => (
+    <div className="body-content">
+      {schools.filter(school => school.name !== "Not Enrolled").map(school => (
         <div key={school.id}>
           <a href={`#${location.pathname}/${school.id}`}><h4>{school.name}</h4></a>
-          <div>{school.img}</div>
+          <div><img src={`${school.imgURL}`} alt={`${school.name}`} /></div>
           <div>Student Count: {school.students.length}</div>
+          <div>
           <select onChange = {({target}) => updateStudent(target.value, school.id)}>
             <option value="addStudent">--Add Student--</option>
             {students
@@ -24,7 +25,7 @@ const Schools = ({ schools, students , updateStudent, location}) => {
                   {student.firstName} {student.lastName}
                 </option>
               ))}
-          </select>
+          </select></div>
         </div>
       ))}
     </div>
